@@ -16,6 +16,7 @@ class Bs4Element extends Shared
   }
 
   String? selector;
+  int? selectedIndex;
 
   factory Bs4Element(Element element) => Bs4Element._(element);
 
