@@ -64,12 +64,12 @@ class Shared extends Tags implements ITreeSearcher, IOutput {
     assert(limit == null || limit >= 0);
 
     if (selector != null) {
-      return ((element ?? doc).querySelectorAll(selector) as List<Element>).indexed
-          .map((e) {
-            e.$2.bs4.selector = selector;
-            e.$2.bs4.selectedIndex = e.$1;
-            return e.$2.bs4;
-          })
+      return ((element ?? doc).querySelectorAll(selector) as List<Element>).asMap()
+          .map((index, e) {
+            e.bs4.selector = selector;
+            e.bs4.selectedIndex = index;
+            return MapEntry(index, e.bs4);
+          }).values
           .toList();
     }
     bool anyTag = _isAnyTag(name);
