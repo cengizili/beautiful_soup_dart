@@ -23,6 +23,7 @@ class Shared extends Tags implements ITreeSearcher, IOutput {
     String? selector,
   }) {
     if (selector != null) {
+      ((element ?? doc).querySelector(selector) as Element?)?.bs4.selector = selector;
       return ((element ?? doc).querySelector(selector) as Element?)?.bs4;
     }
     if (id == null && class_ == null && regex == null && string == null) {

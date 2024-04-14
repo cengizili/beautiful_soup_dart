@@ -15,6 +15,8 @@ class Bs4Element extends Shared
     this.element = element;
   }
 
+  String? selector;
+
   factory Bs4Element(Element element) => Bs4Element._(element);
 
   bool _isDecomposed = false;
