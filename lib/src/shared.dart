@@ -23,7 +23,10 @@ class Shared extends Tags implements ITreeSearcher, IOutput {
     String? selector,
   }) {
     if (selector != null) {
-      return ((element ?? doc).querySelector(selector) as Element?)?.bs4?..selector = selector;
+      final el = ((element ?? doc).querySelector(selector) as Element?);
+      el?.bs4.selector = selector;
+      el?.bs4.selectedIndex = 0;
+      return el?.bs4;
     }
     if (id == null && class_ == null && regex == null && string == null) {
       bool anyTag = _isAnyTag(name);
@@ -61,8 +64,12 @@ class Shared extends Tags implements ITreeSearcher, IOutput {
     assert(limit == null || limit >= 0);
 
     if (selector != null) {
-      return ((element ?? doc).querySelectorAll(selector) as List<Element>)
-          .map((e) => e.bs4..selector = selector)
+      return ((element ?? doc).querySelectorAll(selector) as List<Element>).indexed
+          .map((e) {
+            e.$2.bs4.selector = selector;
+            e.$2.bs4.selectedIndex = e.$1;
+            return e.$2.bs4;
+          })
           .toList();
     }
     bool anyTag = _isAnyTag(name);
