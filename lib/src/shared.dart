@@ -13,7 +13,7 @@ class Shared extends Tags implements ITreeSearcher, IOutput {
       ((element ?? doc).querySelector('*') as Element?)?.bs4;
 
   @override
-  Bs4Element? find(
+  Bs4Element? select(
     String name, {
     String? id,
     String? class_,
@@ -36,7 +36,7 @@ class Shared extends Tags implements ITreeSearcher, IOutput {
           : _selectorBuilder(tagName: validTag ? name : '*', attrs: attrs!);
       return ((element ?? doc).querySelector(cssSelector) as Element?)?.bs4;
     }
-    return findAll(
+    return selectAll(
       name,
       id: id,
       class_: class_,
@@ -48,7 +48,7 @@ class Shared extends Tags implements ITreeSearcher, IOutput {
   }
 
   @override
-  List<Bs4Element> findAll(
+  List<Bs4Element> selectAll(
     String name, {
     String? id,
     String? class_,
@@ -599,7 +599,7 @@ List<Bs4Element> _getAllResults({
   required Pattern? string,
   required String? selector,
 }) {
-  final allResults = topElement.findAll(
+  final allResults = topElement.selectAll(
     name,
     attrs: attrs,
     regex: regex,

@@ -64,7 +64,7 @@ abstract class ITreeSearcher {
   ///
   /// Use `true` as an attribute value to search any value.
   /// {@endtemplate}
-  List<Bs4Element> findAll(
+  List<Bs4Element> selectAll(
     String name, {
     String? id,
     String? class_,
@@ -87,7 +87,7 @@ abstract class ITreeSearcher {
   ///
   /// {@macro tree_searcher_find}
   /// {@macro tree_searcher_find2}
-  Bs4Element? find(
+  Bs4Element? select(
     String name, {
     String? id,
     String? class_,
